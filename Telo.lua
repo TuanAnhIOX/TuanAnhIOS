@@ -113,7 +113,7 @@ end
 
 local function toggleTeleport(state)
 	enabled = state
-	button.Text = state and "⬆️ Tele ⬆️" or "⬇️ Tele ⬇️"
+	button.Text = state and "⬇️ Tele ⬇️" or "⬆️ Tele ⬆️"
 	tween(button, {
 		BackgroundColor3 = state and Color3.fromRGB(60, 220, 120) or Color3.fromRGB(255, 90, 90)
 	}, 0.3)
