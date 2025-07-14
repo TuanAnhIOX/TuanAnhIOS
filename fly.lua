@@ -9,7 +9,7 @@ gui.Name = "TuanAnhFlyUI"
 gui.ResetOnSpawn = false
 
 local btn = Instance.new("TextButton")
-btn.Size = UDim2.new(0, 200, 0, 50)
+btn.Size = UDim2.new(0, 120, 0, 35)
 btn.Position = UDim2.new(1, -210, 0, 10)
 btn.BackgroundColor3 = Color3.fromRGB(40, 40, 40)
 btn.Text = "Tuấn Anh IOS Fly"
