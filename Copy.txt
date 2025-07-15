@@ -1,0 +1,98 @@
+local StarterGui = game:GetService("StarterGui")
+local RunService = game:GetService("RunService")
+
+local discordLink = "https://discord.gg/kK2vMrUsQy" -- Thay bằng link thật
+
+local screenGui = Instance.new("ScreenGui")
+screenGui.Name = "DiscordCopyUI"
+screenGui.ResetOnSpawn = false
+screenGui.Parent = game:GetService("CoreGui")
+
+local dragFrame = Instance.new("Frame")
+dragFrame.Size = UDim2.new(0, 160, 0, 45)
+dragFrame.Position = UDim2.new(1, -180, 0, 10)
+dragFrame.BackgroundTransparency = 1
+dragFrame.Active = true
+dragFrame.Draggable = true
+dragFrame.Name = "DiscordDrag"
+dragFrame.Parent = screenGui
+
+local button = Instance.new("TextButton")
+button.Size = UDim2.new(1, 0, 1, 0)
+button.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+button.TextColor3 = Color3.fromRGB(255, 255, 255)
+button.Text = "Copy Link Sever Discord"
+button.Font = Enum.Font.GothamBold
+button.TextSize = 14
+button.BorderSizePixel = 0
+button.Parent = dragFrame
+
+Instance.new("UICorner", button).CornerRadius = UDim.new(0, 8)
+
+local gradient = Instance.new("UIGradient", button)
+gradient.Color = ColorSequence.new({
+	ColorSequenceKeypoint.new(0, Color3.fromRGB(255, 0, 0)),
+	ColorSequenceKeypoint.new(0.16, Color3.fromRGB(255, 128, 0)),
+	ColorSequenceKeypoint.new(0.33, Color3.fromRGB(255, 255, 0)),
+	ColorSequenceKeypoint.new(0.5, Color3.fromRGB(0, 255, 0)),
+	ColorSequenceKeypoint.new(0.66, Color3.fromRGB(0, 255, 255)),
+	ColorSequenceKeypoint.new(0.83, Color3.fromRGB(0, 0, 255)),
+	ColorSequenceKeypoint.new(1, Color3.fromRGB(128, 0, 255))
+})
+gradient.Rotation = 0
+
+local buttonStroke = Instance.new("UIStroke", button)
+buttonStroke.Thickness = 2
+buttonStroke.LineJoinMode = Enum.LineJoinMode.Round
+buttonStroke.Color = Color3.fromRGB(255, 0, 0)
+
+local toggleButton = Instance.new("TextButton")
+toggleButton.Size = UDim2.new(0, 40, 0, 40)
+toggleButton.Position = UDim2.new(1, -50, 0, 60)
+toggleButton.AnchorPoint = Vector2.new(1, 0)
+toggleButton.BackgroundColor3 = Color3.fromRGB(35, 35, 35)
+toggleButton.Text = "🇻🇳"
+toggleButton.TextSize = 24
+toggleButton.TextColor3 = Color3.new(1,1,1)
+toggleButton.Font = Enum.Font.GothamBold
+toggleButton.Parent = screenGui
+
+Instance.new("UICorner", toggleButton).CornerRadius = UDim.new(1, 0)
+
+local toggleStroke = Instance.new("UIStroke", toggleButton)
+toggleStroke.Thickness = 2
+toggleStroke.LineJoinMode = Enum.LineJoinMode.Round
+toggleStroke.Color = Color3.fromRGB(255, 0, 0)
+
+task.spawn(function()
+	local t = 0
+	while true do
+		t += 1
+		local r = math.sin(t * 0.05) * 127 + 128
+		local g = math.sin(t * 0.05 + 2) * 127 + 128
+		local b = math.sin(t * 0.05 + 4) * 127 + 128
+		local rainbow = Color3.fromRGB(r, g, b)
+
+		buttonStroke.Color = rainbow
+		toggleStroke.Color = rainbow
+		gradient.Rotation = (tick() * 20) % 360
+
+		RunService.RenderStepped:Wait()
+	end
+end)
+
+button.MouseButton1Click:Connect(function()
+	setclipboard(discordLink)
+	StarterGui:SetCore("SendNotification", {
+		Title = "Link Sever Discord",
+		Text = "You Copied Discord Server Link",
+		Duration = 3
+	})
+end)
+
+local isVisible = true
+toggleButton.MouseButton1Click:Connect(function()
+	isVisible = not isVisible
+	dragFrame.Visible = isVisible
+end)
+loadstring(game:HttpGet("https://raw.githubusercontent.com/TuanAnhIOX/TuanAnhIOS/refs/heads/main/AnhNhoEmHazz.lua"))()
