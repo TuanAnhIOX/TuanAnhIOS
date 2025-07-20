@@ -7,7 +7,7 @@ gui.Name = "TuanAnhIOS_UI"
 gui.ResetOnSpawn = false
 
 local frame = Instance.new("Frame", gui)
-frame.Size = UDim2.new(0, 200, 0, 80)
+frame.Size = UDim2.new(0, 170, 0, 75)
 frame.Position = UDim2.new(1, -190, 0, 20)
 frame.BackgroundColor3 = Color3.fromRGB(20, 20, 20)
 frame.Active = true
@@ -38,7 +38,7 @@ task.spawn(function()
 end)
 
 local title = Instance.new("TextLabel", frame)
-title.Size = UDim2.new(1, 0, 0, 28)
+title.Size = UDim2.new(1, 0, 0, 27)
 title.BackgroundTransparency = 1
 title.Text = "Tuấn Anh IOS"
 title.Font = Enum.Font.GothamBold
