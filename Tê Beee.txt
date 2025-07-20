@@ -1,0 +1,89 @@
+local Players = game:GetService("Players")
+local CoreGui = game:GetService("CoreGui")
+local LocalPlayer = Players.LocalPlayer
+
+local gui = Instance.new("ScreenGui", CoreGui)
+gui.Name = "TuanAnhIOS_UI"
+gui.ResetOnSpawn = false
+
+local frame = Instance.new("Frame", gui)
+frame.Size = UDim2.new(0, 200, 0, 80)
+frame.Position = UDim2.new(1, -190, 0, 20)
+frame.BackgroundColor3 = Color3.fromRGB(20, 20, 20)
+frame.Active = true
+frame.Draggable = true
+Instance.new("UICorner", frame).CornerRadius = UDim.new(0, 10)
+
+local stroke = Instance.new("UIStroke", frame)
+stroke.Thickness = 2
+stroke.ApplyStrokeMode = Enum.ApplyStrokeMode.Border
+stroke.Color = Color3.new(1, 1, 1)
+
+local gradient = Instance.new("UIGradient", stroke)
+gradient.Rotation = 0
+gradient.Color = ColorSequence.new{
+	ColorSequenceKeypoint.new(0.0, Color3.fromRGB(255, 0, 0)),
+	ColorSequenceKeypoint.new(0.2, Color3.fromRGB(255, 170, 0)),
+	ColorSequenceKeypoint.new(0.4, Color3.fromRGB(0, 255, 0)),
+	ColorSequenceKeypoint.new(0.6, Color3.fromRGB(0, 255, 255)),
+	ColorSequenceKeypoint.new(0.8, Color3.fromRGB(0, 0, 255)),
+	ColorSequenceKeypoint.new(1.0, Color3.fromRGB(255, 0, 255))
+}
+
+task.spawn(function()
+	while frame.Parent do
+		gradient.Rotation += 1
+		task.wait(0.03)
+	end
+end)
+
+local title = Instance.new("TextLabel", frame)
+title.Size = UDim2.new(1, 0, 0, 28)
+title.BackgroundTransparency = 1
+title.Text = "Tuấn Anh IOS"
+title.Font = Enum.Font.GothamBold
+title.TextColor3 = Color3.new(1, 1, 1)
+title.TextScaled = true
+
+local textGradient = Instance.new("UIGradient", title)
+textGradient.Rotation = 0
+textGradient.Color = gradient.Color
+
+task.spawn(function()
+	while title.Parent do
+		textGradient.Rotation += 1
+		task.wait(0.03)
+	end
+end)
+
+local button = Instance.new("TextButton", frame)
+button.Size = UDim2.new(0.8, 0, 0, 30)
+button.Position = UDim2.new(0.1, 0, 0, 40)
+button.Text = "Tele Vip"
+button.Font = Enum.Font.GothamBold
+button.TextScaled = true
+button.BackgroundColor3 = Color3.fromRGB(0, 105, 148)
+Instance.new("UICorner", button).CornerRadius = UDim.new(0, 6)
+
+button.MouseButton1Click:Connect(function()
+	local char = LocalPlayer.Character or LocalPlayer.CharacterAdded:Wait()
+	local hrp = char:FindFirstChild("HumanoidRootPart")
+	if not hrp then return end
+
+	local original = hrp.Position
+	local skyPos = original + Vector3.new(0, 100, 0)
+
+	local start = tick()
+	while tick() - start < 2 do
+		-- Lên trời
+		hrp.CFrame = CFrame.new(skyPos)
+		wait(0.002)
+
+		-- Ra cực xa
+		hrp.CFrame = CFrame.new(0, -5000000000000000000000, 0)
+		wait(0.2)
+
+		-- Quay lại trời
+		hrp.CFrame = CFrame.new(skyPos)
+	end
+end)
