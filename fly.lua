@@ -42,7 +42,7 @@ task.spawn(function()
         stroke.Color = color
         btn.TextColor3 = color
         i = (i % #rainbow) + 1
-        task.wait(0.15)
+        task.wait(0.5)
     end
 end)
 
