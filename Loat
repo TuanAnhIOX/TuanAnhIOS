@@ -58,7 +58,7 @@ task.spawn(function()
 		if RainbowGradient.Rotation >= 360 then
 			RainbowGradient.Rotation = 0
 		end
-		task.wait(0.03)
+		task.wait(0.05)
 	end
 end)
 
